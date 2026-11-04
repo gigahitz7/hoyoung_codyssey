@@ -1,4 +1,4 @@
-# 개발자 작업실 구축 미션
+﻿# 개발자 작업실 구축 미션
 
 > 이 저장소는 Codyssey와 GitHub 연동에 사용되었으며, 이 문서는 입학연수 개발 워크스테이션 미션의 수행 기록이다.
 
@@ -24,8 +24,8 @@ Windows 개발 환경에서 터미널, 권한, Docker, Git/GitHub를 설정하�
 - [x] 포트 매핑 및 브라우저 접속 확인
 - [x] 바인드 마운트 변경 반영 확인
 - [x] 볼륨 데이터 영속성 확인
-- [ ] README 및 증거 캡처 최종 정리
-- [ ] GitHub 저장소 생성·업로드 및 VS Code 연동 증거
+- [x] README 및 증거 캡처 최종 정리
+- [x] GitHub 저장소 생성·업로드 및 VS Code 연동 증거
 - [ ] Codyssey 평가 요청
 
 ## 4. 터미널 기본 조작
@@ -131,7 +131,7 @@ docker run -d --name codyssey-web -p 8080:80 codyssey-web:1.0
 - 접속 주소: http://localhost:8080/
 - 브라우저에서 HTML 제목과 내용을 확인했다.
 
-**증거 캡처 추가 필요:** `evidence/port-8080.png` (주소창과 페이지 내용이 함께 보이도록)
+**증거:** [port-8080.png](evidence/port-8080.png)
 
 ## 8. 바인드 마운트 검증
 기존 웹 컨테이너를 호스트 파일 바인드 마운트로 다시 실행했다.
@@ -149,7 +149,7 @@ docker inspect codyssey-web --format '{{json .Mounts}}'
 ```
 호스트 `index.html` 내용을 수정한 뒤 이미지를 다시 빌드하지 않고 브라우저를 새로고침해 변경 문구 `바인드 마운트 변경이 반영되었습니다.`가 보이는 것을 확인했다.
 
-**증거 캡처 추가 필요:** `evidence/bind-mount.png` (주소창과 변경된 문구 포함)
+**증거:** [bind-mount.png](evidence/bind-mount.png)
 
 ## 9. Docker 볼륨 영속성 검증
 ```powershell
@@ -176,8 +176,8 @@ git config --list
 `git config --list` 증거를 기록할 때 이메일 등 개인 정보는 마스킹한다.
 
 - GitHub 저장소 URL: https://github.com/gigahitz7/hoyoung_codyssey
-- GitHub 로그인 및 저장소 연결 증거: **[캡처 추가 필요]**
-- VS Code에서 GitHub 로그인 및 저장소 연동 증거: **[캡처 추가 필요]**
+- GitHub/VS Code 작업 공간 캡처: [github-vscode.png](evidence/github-vscode.png)
+- VS Code Source Control 캡처: [github-vscode-repo.png](evidence/github-vscode-repo.png)
 
 ## 11. 트러블슈팅
 ### 1) PowerShell에서 `docker` 명령을 찾지 못함
@@ -195,3 +195,4 @@ git config --list
 - 비밀번호, 토큰, 개인키, 인증 코드 등은 문서·로그·스크린샷에 포함하지 않는다.
 - 공개 저장소 커밋 기록에 이메일이 노출되지 않도록 확인하고, 필요하면 GitHub `noreply` 이메일을 사용한다.
 - 계정 정보가 찍힌 `git config --list` 캡처는 마스킹 후 사용한다.
+
