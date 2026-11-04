@@ -280,3 +280,28 @@ main -> main (성공)
 
 
 
+
+## 14. 볼륨 백업 및 복원 검증
+백업 아카이브는 임시 폴더에 생성해 저장소에는 포함하지 않았다.
+
+```powershell
+$BackupDir = Join-Path $env:TEMP "codyssey-backup"
+New-Item -ItemType Directory -Force -Path $BackupDir | Out-Null
+docker run --rm -v codyssey-data:/data --mount "type=bind,source=$BackupDir,target=/backup" ubuntu sh -c "tar -czf /backup/codyssey-data.tar.gz -C /data ."
+Get-Item (Join-Path $BackupDir "codyssey-data.tar.gz")
+docker volume create codyssey-data-restore
+docker run --rm -v codyssey-data-restore:/data --mount "type=bind,source=$BackupDir,target=/backup,readonly" ubuntu sh -c "tar -xzf /backup/codyssey-data.tar.gz -C /data"
+docker run --rm -v codyssey-data-restore:/data ubuntu cat /data/proof.txt
+```
+
+검증 결과: 복원된 새 볼륨에서 `volume persistence works`가 출력되어 백업 데이터 복원을 확인했다.
+
+
+
+
+
+
+
+
+
+
