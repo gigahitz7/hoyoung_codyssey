@@ -196,3 +196,87 @@ git config --list
 - 공개 저장소 커밋 기록에 이메일이 노출되지 않도록 확인하고, 필요하면 GitHub `noreply` 이메일을 사용한다.
 - 계정 정보가 찍힌 `git config --list` 캡처는 마스킹 후 사용한다.
 
+
+## 13. 사전평가 보완: 핵심 개념과 진단
+
+### 이미지와 컨테이너
+- Docker 이미지는 컨테이너를 만들 때 사용하는 변경 불가능한 템플릿이다. 컨테이너는 그 이미지로부터 실행된 격리된 인스턴스이며, 실행 중 변경은 기본적으로 컨테이너의 쓰기 계층에 생긴다.
+- Dockerfile을 수정하면 이미지를 다시 빌드해야 변경이 반영된다. 컨테이너를 재시작하는 것만으로 이미지 내용이 바뀌지는 않는다.
+
+### 네트워크와 포트 포워딩
+- 컨테이너는 별도의 네트워크 네임스페이스를 사용하므로, 컨테이너의 80번 포트가 호스트에서 자동으로 보이지 않는다.
+- `-p 8080:80`은 호스트의 8080번 포트로 들어온 요청을 컨테이너의 80번 포트로 전달한다. 따라서 브라우저에서 `http://localhost:8080`으로 접속한다.
+
+### 절대 경로와 상대 경로
+- 바인드 마운트의 source는 호스트 파일 경로다. 이 실습은 `$PWD.Path`를 사용해 현재 프로젝트 폴더를 기준으로 실제 절대 경로를 만들었다.
+- 상대 경로는 명령을 실행한 현재 디렉터리에 따라 달라질 수 있어 재현성이 떨어진다. README에는 개인정보가 포함된 사용자 경로 대신 프로젝트 루트 기준 예시를 사용한다.
+
+### 포트 충돌 진단 (Windows PowerShell)
+Docker가 8080 포트를 이미 사용 중이라고 보고하면 먼저 수신 프로세스를 확인한다.
+
+```powershell
+Get-NetTCPConnection -LocalPort 8080 -State Listen -ErrorAction SilentlyContinue | Select-Object LocalAddress, LocalPort, OwningProcess
+Get-Process -Id <OwningProcess PID>
+```
+
+프로세스가 실제로 불필요한지 확인한 뒤에만 종료한다. 종료할 수 없거나 다른 앱이 사용하는 포트라면 `-p 8081:80`처럼 다른 호스트 포트를 선택하고 `http://localhost:8081`로 검증한다. 이 미션에서는 포트 충돌이 발생하지 않아 진단 절차는 예방용으로 기록한다.
+
+### Git 원격 저장소와 push 검증
+```text
+git remote -v
+origin  https://github.com/gigahitz7/hoyoung_codyssey.git (fetch)
+origin  https://github.com/gigahitz7/hoyoung_codyssey.git (push)
+
+git push -u origin main
+main -> main (성공)
+```
+
+### 저장소 디렉터리 구조
+```text
+.
+├── Dockerfile
+├── index.html
+├── README.md
+├── cli-practice/
+└── evidence/
+    ├── bind-mount.png
+    ├── port-8080.png
+    ├── github-vscode.png
+    └── github-vscode-repo.png
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
