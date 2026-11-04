@@ -1,33 +1,31 @@
-# 개발자 작업실 구축 미션
+﻿# 媛쒕컻???묒뾽??援ъ텞 誘몄뀡
 
-## 1. 미션 개요
-Windows 개발 환경에서 터미널, 권한, Docker, Git/GitHub를 설정하고, Dockerfile 기반 웹 서버를 빌드·실행해 포트 매핑, 바인드 마운트, 볼륨 영속성을 검증한다.
+## 1. 誘몄뀡 媛쒖슂
+Windows 媛쒕컻 ?섍꼍?먯꽌 ?곕??? 沅뚰븳, Docker, Git/GitHub瑜??ㅼ젙?섍퀬, Dockerfile 湲곕컲 ???쒕쾭瑜?鍮뚮뱶쨌?ㅽ뻾???ы듃 留ㅽ븨, 諛붿씤??留덉슫?? 蹂쇰ⅷ ?곸냽?깆쓣 寃利앺븳??
 
-## 2. 개발 환경
-- OS: Windows (PowerShell 사용)
+## 2. 媛쒕컻 ?섍꼍
+- OS: Windows (PowerShell ?ъ슜)
 - PowerShell: 5.1.26100.9818
-- WSL 배포판: Ubuntu, 기본 WSL 버전 2
+- WSL 諛고룷?? Ubuntu, 湲곕낯 WSL 踰꾩쟾 2
 - Git for Windows: 2.56.0.windows.4
 - Docker: 29.9.2 (build a82e528)
 - Docker Server: 29.9.2
 
-## 3. 수행 체크리스트
-- [x] 터미널 위치·파일 목록·숨김 파일 확인
-- [x] 파일/디렉터리 생성, 복사, 이동, 이름 변경, 삭제
-- [x] 파일 내용 확인 및 빈 파일 생성
-- [x] Linux 파일·디렉터리 권한 변경
-- [x] Docker 설치 및 엔진 점검
-- [x] `hello-world`, Ubuntu 컨테이너 실행 및 운영
-- [x] Nginx 기반 커스텀 이미지 빌드
-- [x] 포트 매핑 및 브라우저 접속 확인
-- [x] 바인드 마운트 변경 반영 확인
-- [x] 볼륨 데이터 영속성 확인
-- [ ] README 및 증거 캡처 최종 정리
-- [ ] GitHub 저장소 생성·업로드 및 VS Code 연동 증거
-- [ ] Codyssey 평가 요청
+## 3. ?섑뻾 泥댄겕由ъ뒪??- [x] ?곕????꾩튂쨌?뚯씪 紐⑸줉쨌?④? ?뚯씪 ?뺤씤
+- [x] ?뚯씪/?붾젆?곕━ ?앹꽦, 蹂듭궗, ?대룞, ?대쫫 蹂寃? ??젣
+- [x] ?뚯씪 ?댁슜 ?뺤씤 諛?鍮??뚯씪 ?앹꽦
+- [x] Linux ?뚯씪쨌?붾젆?곕━ 沅뚰븳 蹂寃?- [x] Docker ?ㅼ튂 諛??붿쭊 ?먭?
+- [x] `hello-world`, Ubuntu 而⑦뀒?대꼫 ?ㅽ뻾 諛??댁쁺
+- [x] Nginx 湲곕컲 而ㅼ뒪? ?대?吏 鍮뚮뱶
+- [x] ?ы듃 留ㅽ븨 諛?釉뚮씪?곗? ?묒냽 ?뺤씤
+- [x] 諛붿씤??留덉슫??蹂寃?諛섏쁺 ?뺤씤
+- [x] 蹂쇰ⅷ ?곗씠???곸냽???뺤씤
+- [ ] README 諛?利앷굅 罹≪쿂 理쒖쥌 ?뺣━
+- [ ] GitHub ??μ냼 ?앹꽦쨌?낅줈??諛?VS Code ?곕룞 利앷굅
+- [ ] Codyssey ?됯? ?붿껌
 
-## 4. 터미널 기본 조작
-PowerShell에서 `Documents\codyssey-workshop\cli-practice` 폴더를 사용해 실습했다.
+## 4. ?곕???湲곕낯 議곗옉
+PowerShell?먯꽌 `Documents\codyssey-workshop\cli-practice` ?대뜑瑜??ъ슜???ㅼ뒿?덈떎.
 
 ```powershell
 Get-Location
@@ -44,9 +42,9 @@ Remove-Item .\work\notes-renamed.txt
 Remove-Item .\work
 ```
 
-확인 결과: `empty.txt`는 0바이트였고, `Get-ChildItem -Force`로 숨김 파일을 확인했다. 파일 내용은 `sample text for Codyssey`였다. 복사·이동·이름 변경 후 임시 파일과 폴더를 삭제했다.
+?뺤씤 寃곌낵: `empty.txt`??0諛붿씠?몄?怨? `Get-ChildItem -Force`濡??④? ?뚯씪???뺤씤?덈떎. ?뚯씪 ?댁슜? `sample text for Codyssey`??? 蹂듭궗쨌?대룞쨌?대쫫 蹂寃????꾩떆 ?뚯씪怨??대뜑瑜???젣?덈떎.
 
-## 5. 권한 실습 (WSL Ubuntu)
+## 5. 沅뚰븳 ?ㅼ뒿 (WSL Ubuntu)
 ```bash
 chmod 600 sample.txt
 chmod 700 sample-dir
@@ -56,23 +54,23 @@ chmod 755 sample-dir
 ls -ld sample.txt sample-dir
 ```
 
-변경 전:
+蹂寃???
 ```text
 drwx------ ... sample-dir
 -rw------- ... sample.txt
 ```
 
-변경 후:
+蹂寃???
 ```text
 drwxr-xr-x ... sample-dir
 -rw-r--r-- ... sample.txt
 ```
 
-- `644`: 소유자는 읽기/쓰기, 그룹과 기타 사용자는 읽기 가능 (`rw-r--r--`).
-- `755`: 소유자는 읽기/쓰기/접근, 그룹과 기타 사용자는 읽기/접근 가능 (`rwxr-xr-x`).
-- 디렉터리의 `x` 권한은 디렉터리 안으로 접근(traverse)하는 권한이다.
+- `644`: ?뚯쑀?먮뒗 ?쎄린/?곌린, 洹몃９怨?湲고? ?ъ슜?먮뒗 ?쎄린 媛??(`rw-r--r--`).
+- `755`: ?뚯쑀?먮뒗 ?쎄린/?곌린/?묎렐, 洹몃９怨?湲고? ?ъ슜?먮뒗 ?쎄린/?묎렐 媛??(`rwxr-xr-x`).
+- ?붾젆?곕━??`x` 沅뚰븳? ?붾젆?곕━ ?덉쑝濡??묎렐(traverse)?섎뒗 沅뚰븳?대떎.
 
-## 6. Docker 설치 및 기본 점검
+## 6. Docker ?ㅼ튂 諛?湲곕낯 ?먭?
 ```powershell
 docker --version
 # Docker version 29.9.2, build a82e528
@@ -81,35 +79,35 @@ docker info --format '{{.ServerVersion}}'
 # 29.9.2
 
 docker run --rm hello-world
-# Hello from Docker! (설치 및 데몬 통신 성공)
+# Hello from Docker! (?ㅼ튂 諛??곕が ?듭떊 ?깃났)
 
 docker images
-# hello-world:latest, ubuntu:latest 및 이후 빌드한 codyssey-web:1.0 확인
+# hello-world:latest, ubuntu:latest 諛??댄썑 鍮뚮뱶??codyssey-web:1.0 ?뺤씤
 ```
 
-### Ubuntu 컨테이너
+### Ubuntu 而⑦뀒?대꼫
 ```powershell
 docker run --name codyssey-ubuntu -it ubuntu bash
 ```
-컨테이너 안에서 `pwd`, `ls -la`, `echo`를 실행하고 `exit`했다. `docker ps -a`에서 컨테이너가 `Exited (0)`으로 종료된 것을 확인했다.
+而⑦뀒?대꼫 ?덉뿉??`pwd`, `ls -la`, `echo`瑜??ㅽ뻾?섍퀬 `exit`?덈떎. `docker ps -a`?먯꽌 而⑦뀒?대꼫媛 `Exited (0)`?쇰줈 醫낅즺??寃껋쓣 ?뺤씤?덈떎.
 
-### `exec`와 `attach`, 로그·리소스·중지
+### `exec`? `attach`, 濡쒓렇쨌由ъ냼?ㅒ룹쨷吏
 ```powershell
 docker run -dit --name codyssey-ubuntu-bg ubuntu bash
 docker exec -it codyssey-ubuntu-bg bash
-# 컨테이너 안에서 echo 실행 후 exit. 메인 컨테이너는 계속 Up
+# 而⑦뀒?대꼫 ?덉뿉??echo ?ㅽ뻾 ??exit. 硫붿씤 而⑦뀒?대꼫??怨꾩냽 Up
 
 docker attach codyssey-ubuntu-bg
-# 메인 셸에 연결. Ctrl+P, Ctrl+Q로 분리
+# 硫붿씤 ?몄뿉 ?곌껐. Ctrl+P, Ctrl+Q濡?遺꾨━
 
 docker logs codyssey-ubuntu-bg
 docker stats --no-stream codyssey-ubuntu-bg
 docker stop codyssey-ubuntu-bg
 docker ps -a --filter name=codyssey-ubuntu-bg
 ```
-`exec` 셸을 종료해도 컨테이너 메인 프로세스는 실행 중인 것을 확인했다. `docker stop` 후 컨테이너는 `Exited` 상태였다.
+`exec` ?몄쓣 醫낅즺?대룄 而⑦뀒?대꼫 硫붿씤 ?꾨줈?몄뒪???ㅽ뻾 以묒씤 寃껋쓣 ?뺤씤?덈떎. `docker stop` ??而⑦뀒?대꼫??`Exited` ?곹깭???
 
-## 7. 커스텀 웹 서버 이미지 및 포트 매핑
+## 7. 而ㅼ뒪? ???쒕쾭 ?대?吏 諛??ы듃 留ㅽ븨
 ### Dockerfile
 ```dockerfile
 FROM nginx:alpine
@@ -117,22 +115,21 @@ COPY index.html /usr/share/nginx/html/index.html
 EXPOSE 80
 ```
 
-`index.html`에 실습 제목과 한국어 설명을 작성했다.
+`index.html`???ㅼ뒿 ?쒕ぉ怨??쒓뎅???ㅻ챸???묒꽦?덈떎.
 
 ```powershell
 docker build -t codyssey-web:1.0 .
 docker run -d --name codyssey-web -p 8080:80 codyssey-web:1.0
 ```
-- 베이스 이미지: `nginx:alpine`
-- 호스트 포트: `8080`
-- 컨테이너 포트: `80`
-- 접속 주소: http://localhost:8080/
-- 브라우저에서 HTML 제목과 내용을 확인했다.
+- 踰좎씠???대?吏: `nginx:alpine`
+- ?몄뒪???ы듃: `8080`
+- 而⑦뀒?대꼫 ?ы듃: `80`
+- ?묒냽 二쇱냼: http://localhost:8080/
+- 釉뚮씪?곗??먯꽌 HTML ?쒕ぉ怨??댁슜???뺤씤?덈떎.
 
-**증거 캡처 추가 필요:** `evidence/port-8080.png` (주소창과 페이지 내용이 함께 보이도록)
+**利앷굅 罹≪쿂 異붽? ?꾩슂:** `evidence/port-8080.png` (二쇱냼李쎄낵 ?섏씠吏 ?댁슜???④퍡 蹂댁씠?꾨줉)
 
-## 8. 바인드 마운트 검증
-기존 웹 컨테이너를 호스트 파일 바인드 마운트로 다시 실행했다.
+## 8. 諛붿씤??留덉슫??寃利?湲곗〈 ??而⑦뀒?대꼫瑜??몄뒪???뚯씪 諛붿씤??留덉슫?몃줈 ?ㅼ떆 ?ㅽ뻾?덈떎.
 
 ```powershell
 docker run -d --name codyssey-web -p 8080:80 `
@@ -141,50 +138,49 @@ docker run -d --name codyssey-web -p 8080:80 `
 
 docker inspect codyssey-web --format '{{json .Mounts}}'
 ```
-검증 결과의 주요 값:
+寃利?寃곌낵??二쇱슂 媛?
 ```json
 {"Type":"bind","Destination":"/usr/share/nginx/html/index.html","RW":false}
 ```
-호스트 `index.html` 내용을 수정한 뒤 이미지를 다시 빌드하지 않고 브라우저를 새로고침해 변경 문구 `바인드 마운트 변경이 반영되었습니다.`가 보이는 것을 확인했다.
+?몄뒪??`index.html` ?댁슜???섏젙?????대?吏瑜??ㅼ떆 鍮뚮뱶?섏? ?딄퀬 釉뚮씪?곗?瑜??덈줈怨좎묠??蹂寃?臾멸뎄 `諛붿씤??留덉슫??蹂寃쎌씠 諛섏쁺?섏뿀?듬땲??`媛 蹂댁씠??寃껋쓣 ?뺤씤?덈떎.
 
-**증거 캡처 추가 필요:** `evidence/bind-mount.png` (주소창과 변경된 문구 포함)
+**利앷굅 罹≪쿂 異붽? ?꾩슂:** `evidence/bind-mount.png` (二쇱냼李쎄낵 蹂寃쎈맂 臾멸뎄 ?ы븿)
 
-## 9. Docker 볼륨 영속성 검증
-```powershell
+## 9. Docker 蹂쇰ⅷ ?곸냽??寃利?```powershell
 docker volume create codyssey-data
 docker run --name codyssey-volume-write -v codyssey-data:/data ubuntu sh -c "echo 'volume persistence works' > /data/proof.txt && cat /data/proof.txt"
 docker rm codyssey-volume-write
 docker run --rm -v codyssey-data:/data ubuntu cat /data/proof.txt
 docker volume inspect codyssey-data
 ```
-첫 컨테이너에서 `volume persistence works`를 기록한 뒤 컨테이너를 삭제하고, 새 컨테이너에서 같은 내용을 읽었다. 볼륨 데이터가 컨테이너 제거 후에도 유지됨을 확인했다.
+泥?而⑦뀒?대꼫?먯꽌 `volume persistence works`瑜?湲곕줉????而⑦뀒?대꼫瑜???젣?섍퀬, ??而⑦뀒?대꼫?먯꽌 媛숈? ?댁슜???쎌뿀?? 蹂쇰ⅷ ?곗씠?곌? 而⑦뀒?대꼫 ?쒓굅 ?꾩뿉???좎??⑥쓣 ?뺤씤?덈떎.
 
-## 10. Git 설정 및 GitHub 연동
+## 10. Git ?ㅼ젙 諛?GitHub ?곕룞
 ```powershell
 git config --global user.name "gigahitz7"
-git config --global user.email "<개인 이메일은 공개 저장소에서 노출되지 않도록 확인/마스킹>"
+git config --global user.email "<媛쒖씤 ?대찓?쇱? 怨듦컻 ??μ냼?먯꽌 ?몄텧?섏? ?딅룄濡??뺤씤/留덉뒪??"
 git config --global init.defaultBranch main
 git config --list
 ```
-`git config --list` 증거를 기록할 때 이메일 등 개인 정보는 마스킹한다.
+`git config --list` 利앷굅瑜?湲곕줉?????대찓????媛쒖씤 ?뺣낫??留덉뒪?뱁븳??
 
-- GitHub 저장소 URL: **[업로드 후 입력]**
-- GitHub 로그인 및 저장소 연결 증거: **[캡처 추가 필요]**
-- VS Code에서 GitHub 로그인 및 저장소 연동 증거: **[캡처 추가 필요]**
+- GitHub ??μ냼 URL: **[?낅줈?????낅젰]**
+- GitHub 濡쒓렇??諛???μ냼 ?곌껐 利앷굅: **[罹≪쿂 異붽? ?꾩슂]**
+- VS Code?먯꽌 GitHub 濡쒓렇??諛???μ냼 ?곕룞 利앷굅: **[罹≪쿂 異붽? ?꾩슂]**
 
-## 11. 트러블슈팅
-### 1) PowerShell에서 `docker` 명령을 찾지 못함
-- 문제: `docker`가 cmdlet/프로그램으로 인식되지 않았다.
-- 원인 가설: Docker Desktop/CLI가 설치되지 않았거나 PowerShell 환경에서 아직 명령을 찾지 못하는 상태였다.
-- 확인: `docker --version`과 `docker info`가 모두 명령을 찾지 못했다.
-- 해결 및 검증: Docker Desktop 설치·실행 후 새 PowerShell에서 재확인했고, `Docker version 29.9.2`와 서버 버전 `29.9.2`를 확인했다.
+## 11. ?몃윭釉붿뒋??### 1) PowerShell?먯꽌 `docker` 紐낅졊??李얠? 紐삵븿
+- 臾몄젣: `docker`媛 cmdlet/?꾨줈洹몃옩?쇰줈 ?몄떇?섏? ?딆븯??
+- ?먯씤 媛?? Docker Desktop/CLI媛 ?ㅼ튂?섏? ?딆븯嫄곕굹 PowerShell ?섍꼍?먯꽌 ?꾩쭅 紐낅졊??李얠? 紐삵븯???곹깭???
+- ?뺤씤: `docker --version`怨?`docker info`媛 紐⑤몢 紐낅졊??李얠? 紐삵뻽??
+- ?닿껐 諛?寃利? Docker Desktop ?ㅼ튂쨌?ㅽ뻾 ????PowerShell?먯꽌 ?ы솗?명뻽怨? `Docker version 29.9.2`? ?쒕쾭 踰꾩쟾 `29.9.2`瑜??뺤씤?덈떎.
 
-### 2) PowerShell 응답에서 한글이 깨져 보임
-- 문제: `Invoke-WebRequest` 결과에서 한글이 깨진 문자로 표시됐다.
-- 확인: 같은 페이지를 브라우저에서 열어 확인한 결과, 제목과 한국어 문장이 정상 표시됐다.
-- 대안: PowerShell 5.1 출력의 문자 디코딩 문제로 판단하고 브라우저 렌더링으로 웹페이지 표시를 검증했다.
+### 2) PowerShell ?묐떟?먯꽌 ?쒓???源⑥졇 蹂댁엫
+- 臾몄젣: `Invoke-WebRequest` 寃곌낵?먯꽌 ?쒓???源⑥쭊 臾몄옄濡??쒖떆?먮떎.
+- ?뺤씤: 媛숈? ?섏씠吏瑜?釉뚮씪?곗??먯꽌 ?댁뼱 ?뺤씤??寃곌낵, ?쒕ぉ怨??쒓뎅??臾몄옣???뺤긽 ?쒖떆?먮떎.
+- ??? PowerShell 5.1 異쒕젰??臾몄옄 ?붿퐫??臾몄젣濡??먮떒?섍퀬 釉뚮씪?곗? ?뚮뜑留곸쑝濡??뱁럹?댁? ?쒖떆瑜?寃利앺뻽??
 
-## 12. 보안 및 개인정보
-- 비밀번호, 토큰, 개인키, 인증 코드 등은 문서·로그·스크린샷에 포함하지 않는다.
-- 공개 저장소 커밋 기록에 이메일이 노출되지 않도록 확인하고, 필요하면 GitHub `noreply` 이메일을 사용한다.
-- 계정 정보가 찍힌 `git config --list` 캡처는 마스킹 후 사용한다.
+## 12. 蹂댁븞 諛?媛쒖씤?뺣낫
+- 鍮꾨?踰덊샇, ?좏겙, 媛쒖씤?? ?몄쬆 肄붾뱶 ?깆? 臾몄꽌쨌濡쒓렇쨌?ㅽ겕由곗꺑???ы븿?섏? ?딅뒗??
+- 怨듦컻 ??μ냼 而ㅻ컠 湲곕줉???대찓?쇱씠 ?몄텧?섏? ?딅룄濡??뺤씤?섍퀬, ?꾩슂?섎㈃ GitHub `noreply` ?대찓?쇱쓣 ?ъ슜?쒕떎.
+- 怨꾩젙 ?뺣낫媛 李랁엺 `git config --list` 罹≪쿂??留덉뒪?????ъ슜?쒕떎.
+
