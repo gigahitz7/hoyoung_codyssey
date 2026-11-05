@@ -296,7 +296,40 @@ docker run --rm -v codyssey-data-restore:/data ubuntu cat /data/proof.txt
 
 검증 결과: 복원된 새 볼륨에서 `volume persistence works`가 출력되어 백업 데이터 복원을 확인했다.
 
+## 🔐 보너스 과제: SSH 키 설정
 
+### 작업 목적
+매번 GitHub 접속 시 입력하던 아이디/토큰 인증을 SSH 키 방식으로 전환하여,
+인증 과정을 자동화하고 보안을 강화함.
+
+### 작업 단계
+1. SSH 키 생성 (공개키/개인키 한 쌍 생성)
+2. 공개키를 GitHub 계정에 등록
+3. 원격 저장소 주소를 HTTPS → SSH 방식으로 변경
+4. SSH 연결 테스트로 정상 인증 확인
+
+### 사용한 주요 명령어
+```bash
+# 원격 주소를 SSH로 변경
+git remote set-url origin git@github.com:계정명/저장소명.git
+
+# 변경된 원격 주소 확인
+git remote -v
+
+# SSH 연결 테스트
+ssh -T git@github.com
+```
+
+### 결과 (인증 성공)
+```
+Hi 계정명! You've successfully authenticated,
+but GitHub does not provide shell access.
+```
+→ "successfully authenticated" 메시지로 SSH 인증 성공 확인
+
+### 기대 효과
+- git push/pull 시 아이디·토큰 입력 불필요 → 작업 효율 향상
+- 키 기반 인증으로 보안 강화
 
 
 
