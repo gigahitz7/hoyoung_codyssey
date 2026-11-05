@@ -311,7 +311,7 @@ docker run --rm -v codyssey-data-restore:/data ubuntu cat /data/proof.txt
 ### 사용한 주요 명령어
 ```bash
 # 원격 주소를 SSH로 변경
-git remote set-url origin git@github.com:계정명/저장소명.git
+git remote set-url origin git@github.com:gigahitz7/hoyoung_codyssey.git
 
 # 변경된 원격 주소 확인
 git remote -v
@@ -322,7 +322,7 @@ ssh -T git@github.com
 
 ### 결과 (인증 성공)
 ```
-Hi 계정명! You've successfully authenticated,
+Hi  gigahitz7! You've successfully authenticated,
 but GitHub does not provide shell access.
 ```
 → "successfully authenticated" 메시지로 SSH 인증 성공 확인
